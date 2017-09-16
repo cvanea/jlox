@@ -53,7 +53,10 @@ class Scanner {
                 if (match('/')) {
                     while (peek() != '\n' && !isAtEnd()) advance();
                 } else if (match('*')) {
-                    while (peek() != '*' && !isAtEnd() && peekNext() != '/') advance();
+                    while (!(peek() == '*' && peekNext() == '/') && !isAtEnd()) {
+                        advance();
+                    }
+                    advanceNext();
                 } else {
                     addToken(SLASH);
                 }
@@ -166,6 +169,11 @@ class Scanner {
 
     private char advance() {
         current++;
+        return source.charAt(current - 1);
+    }
+
+    private char advanceNext() {
+        current += 2;
         return source.charAt(current - 1);
     }
 

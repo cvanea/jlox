@@ -2,6 +2,7 @@ package main.java.tool;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class GenerateAST {
         writer.println("");
         writer.println("abstract class " + baseName + " {");
 
+        defineVisitor(writer, baseName, types);
+
         for (String type : types) {
             String className = type.split(":")[0].trim();
             String fields = type.split(":")[1].trim();
@@ -39,6 +42,11 @@ public class GenerateAST {
 
         writer.println("}");
         writer.close();
+    }
+
+    private static void defineVisitor(
+        PrintWriter writer, String baseName, List<String> types) {
+
     }
 
     private static void defineType(PrintWriter writer, String baseName, String className, String fieldList) {
